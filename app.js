@@ -5,6 +5,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//mongo requires
+require('dotenv').config();
+const connectDB = require('./config/db');
+connectDB();
+
 //routers
 var indexRouter = require('./routes/index');
 var recipesRouter = require('./routes/recipes');
