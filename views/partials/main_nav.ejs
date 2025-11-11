@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/">
+      <i class="fa-solid fa-book-open text-danger me-1"></i> Recipe Manager
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+      aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+        <!-- Home -->
+        <li class="nav-item">
+          <% if(title == "Home" || title == "Recipe Manager") { %>
+            <a class="nav-link active" href="/"><i class="fa-solid fa-house-chimney me-1"></i> Home</a>
+          <% } else { %>
+            <a class="nav-link" href="/"><i class="fa-solid fa-house-chimney me-1"></i> Home</a>
+          <% } %>
+        </li>
+
+        <!-- My Recipes -->
+        <li class="nav-item">
+          <% if(title == "My Recipes") { %>
+            <a class="nav-link active" href="/recipes"><i class="fa-solid fa-utensils me-1"></i> My Recipes</a>
+          <% } else { %>
+            <a class="nav-link" href="/recipes"><i class="fa-solid fa-utensils me-1"></i> My Recipes</a>
+          <% } %>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
