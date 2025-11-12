@@ -38,4 +38,57 @@ router.post('/', async function(req, res, next) {
   }
 });
 
+//GET for edit
+router.get('/:id/edit', async function(req, res, next) {
+  try {
+    let recipe = await Recipe.findById(req.params.id).lean();
+    if (!recipe) return res.status(404).send('Recipe not found!');
+    res.render('recipes/edit', { title: 'Edit Recipe', recipe });
+  } catch (err) {
+    next(err);
+  }
+});
+
+//POST edits (update)
+router.post('/:id/edit', async function(req, res, next) {
+  try {
+    let title = req.body.title;
+    let ingredients = req.body.ingredients;
+    let steps = req.body.steps;
+    let tags = (req.body.tags || '')
+      .split(',')
+      .map(t => t.trim())
+      .filter(Boolean);
+
+    await Recipe.findByIdAndUpdate(req.params.id, {
+      title, ingredients, steps, tags
+    });
+
+    res.redirect('/recipes');
+  } catch (err) {
+    next(err);
+  }
+});
+
+//GET for delete conf
+router.get('/:id/delete', async function(req, res, next) {
+  try {
+    let recipe = await Recipe.findById(req.params.id).lean();
+    if (!recipe) return res.status(404).send('Recipe not found');
+    res.render('recipes/delete', { title: 'Delete Recipe', recipe });
+  } catch (err) {
+    next(err);
+  }
+});
+
+//POST delete it
+router.post('/:id/delete', async function(req, res, next) {
+  try {
+    await Recipe.findByIdAndDelete(req.params.id);
+    res.redirect('/recipes');
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
