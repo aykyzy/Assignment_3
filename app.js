@@ -1,3 +1,6 @@
+//main server entry point for the app
+//sets up express, mongo, middleware as well as routes
+
 //standard requries
 var createError = require('http-errors');
 var express = require('express');
@@ -5,8 +8,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//mongo requires
+//loading environemnt table
 require('dotenv').config();
+
+//connecting to mongo
 const connectDB = require('./config/db');
 connectDB();
 
@@ -26,6 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+
+//route handlers
 app.use('/', indexRouter);
 app.use('/recipes', recipesRouter);
 

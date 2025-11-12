@@ -3,7 +3,7 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let Recipe = require('../models/recipe');
 
-//GET /recipes -> list
+//READ: display list of recipes
 router.get('/', async function(req, res, next){
   try{
     let recipes = await Recipe.find().sort({ createdAt: -1 }).lean();
@@ -13,12 +13,12 @@ router.get('/', async function(req, res, next){
   }
 });
 
-//GET /recipes/new -> form
+//CREATE: add recipe form
 router.get('/new', function(req, res) {
   res.render('recipes/new', { title: 'Add Recipe' });
 });
 
-//POST /recipes -> create
+//CREATE: form submission
 router.post('/', async function(req, res, next) {
   try {
     let title = req.body.title;
@@ -38,7 +38,7 @@ router.post('/', async function(req, res, next) {
   }
 });
 
-//GET for edit
+//UPDATE: show edit form
 router.get('/:id/edit', async function(req, res, next) {
   try {
     let recipe = await Recipe.findById(req.params.id).lean();
@@ -49,7 +49,7 @@ router.get('/:id/edit', async function(req, res, next) {
   }
 });
 
-//POST edits (update)
+//UPDATE: form submission
 router.post('/:id/edit', async function(req, res, next) {
   try {
     let title = req.body.title;
@@ -70,7 +70,7 @@ router.post('/:id/edit', async function(req, res, next) {
   }
 });
 
-//GET for delete conf
+//DELETE: confirmation delete
 router.get('/:id/delete', async function(req, res, next) {
   try {
     let recipe = await Recipe.findById(req.params.id).lean();
@@ -81,7 +81,7 @@ router.get('/:id/delete', async function(req, res, next) {
   }
 });
 
-//POST delete it
+//DELETE: deletion
 router.post('/:id/delete', async function(req, res, next) {
   try {
     await Recipe.findByIdAndDelete(req.params.id);
