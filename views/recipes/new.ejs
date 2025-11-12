@@ -1,0 +1,35 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/main_nav.ejs') %>
+<!--Content for adding a recipe-->
+    <h1><%= title %></h1>
+
+    <form method="post" action="/recipes" class="mb-4">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input name="title" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ingredients</label>
+            <textarea name="ingredients" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Steps</label>
+            <textarea name="steps" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tags (comma-separated)</label>
+            <input name="tags" class="form-control" placeholder="breakfast, dessert, easy">
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+            <i class="fas fa-save"></i> Save
+        </button>
+        <a href="/recipes" class="btn btn-warning">
+            <i class="fas fa-undo"></i> Cancel
+        </a>
+    </form>
+
+<%- include('../partials/footer.ejs') %>
